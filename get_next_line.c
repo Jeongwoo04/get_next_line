@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:46:26 by jeson             #+#    #+#             */
-/*   Updated: 2021/01/29 13:39:19 by jeson            ###   ########.fr       */
+/*   Updated: 2021/01/29 13:55:25 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int				ft_split_line(char **aa, char **line, int idx)
 	char		*tmp;
 	int			line_len;
 
-	*aa[idx] = '\0';
+	(*aa)[idx] = '\0';
 	*line = ft_strdup(*aa);
 	line_len = ft_strlen(*aa + idx + 1);
 	if (line_len == 0)
@@ -71,7 +71,7 @@ int				get_next_line(int fd, char **line)
 	int			read_size;
 	int			idx;
 
-	if (((fd < 0) || (line = 0) || (BUFFER_SIZE <= 0)))
+	if ((fd < 0) || (line = 0) || (BUFFER_SIZE <= 0))
 		return (-1);
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
