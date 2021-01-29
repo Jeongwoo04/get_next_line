@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:53:52 by jeson             #+#    #+#             */
-/*   Updated: 2021/01/29 14:07:27 by jeson            ###   ########.fr       */
+/*   Updated: 2021/01/29 14:30:50 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t		ft_strlcat(char *dest, const char *src, size_t dstsize)
 	dest_len = ft_strlen(dest);
 	src_len = ft_strlen(src);
 	i = 0;
-	while (src[i] != '\0' && dest_len + 1 + i < dstsize)
+	while (src[i] && ((dest_len + 1 + i) < dstsize))
 	{
 		dest[dest_len + i] = src[i];
 		i++;
@@ -45,27 +45,27 @@ size_t		ft_strlcat(char *dest, const char *src, size_t dstsize)
 size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
 	size_t	i;
+	size_t	src_len;
 
-	if (!dest || !src)
-		return (0);
-	i = ft_strlen(src);
-	if (dstsize == 0)
-		return (i);
+	src_len = 0;
 	i = 0;
+	while (src[src_len])
+		src_len++;
+	if (dstsize == 0)
+		return (src_len);
 	while (src[i] && i < (dstsize - 1))
 	{
 		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = 0;
-	i = ft_strlen(src);
-	return (i);
+	dest[i] = '\0';
+	return (src_len);
 }
 
 char		*ft_strdup(char *s1)
 {
 	char	*res;
-	size_t	i;
+	int		i;
 
 	i = ft_strlen(s1);
 	if (!(res = (char *)malloc(sizeof(char) * (i + 1))))
@@ -82,8 +82,8 @@ char		*ft_strdup(char *s1)
 
 char		*ft_strjoin(char *s1, char *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
+	int		s1_len;
+	int		s2_len;
 	char	*res;
 
 	if (!s1 && !s2)
@@ -96,6 +96,6 @@ char		*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	ft_strlcpy(res, s1, s1_len + 1);
 	free(s1);
-	ft_strlcat(res + (s1_len), s2, s2_len + 1);
+	ft_strlcat(res + s1_len, s2, s2_len + 1);
 	return (res);
 }
