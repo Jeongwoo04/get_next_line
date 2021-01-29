@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_util.c                               :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:53:52 by jeson             #+#    #+#             */
-/*   Updated: 2021/01/26 15:12:13 by jeson            ###   ########.fr       */
+/*   Updated: 2021/01/29 13:37:54 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t		ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (*s)
+	while (*(s + i))
 		i++;
 	return (i);
 }
@@ -36,7 +36,7 @@ size_t		ft_strlcat(char *dest, const char *src, size_t dstsize)
 	while (dest_len < dstsize && dest[dest_len])
 		dest_len++;
 	if (dstsize <= dest_len)
-		return (dstzise + src_len);
+		return (dstsize + src_len);
 	i = 0;
 	while (dstsize && (--dstsize - dest_len) && src[i])
 	{
@@ -76,7 +76,7 @@ char		*ft_strdup(char *s1)
 	if (!(res = (char *)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	i = 0;
-	while (s[i])
+	while (s1[i])
 	{
 		res[i] = s1[i];
 		i++;
@@ -91,18 +91,17 @@ char		*ft_strjoin(char *s1, char *s2)
 	size_t	s2_len;
 	char	*res;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
+	else if (!s1 || !s2)
+		return (!s1 ? ft_strdup(s2) : ft_strdup(s1));
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	if (!(res = malloc(sizeof(char) * (s1_len + s2_len + 1))))
 		return (NULL);
-	while (*s1)
-	{
-		*res++ = *s1++;
-	}
-	while (*s2)
-		*++res = *s2++;
-	*res = '\0';
+	ft_strlcpy(res, s1, s1_len + 1);
+	free(s1);
+	ft_strlcat(res + (s1_len), s2, s2_len + 1);
+	res[s1_len + s2_len + 1] = '\0';
 	return (res);
 }
