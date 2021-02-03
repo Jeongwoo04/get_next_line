@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:53:52 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/03 14:56:09 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/03 15:34:24 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ size_t		ft_strlcat(char *dest, char *src, size_t dstsize)
 	dest_len = ft_strlen(dest);
 	src_len = ft_strlen(src);
 	i = 0;
-	while (src[i] && (dest_len + i < dstsize - 1))
+	while (src[i] && (dest_len + 1 + i < dstsize))
 	{
 		dest[dest_len + i] = src[i];
 		i++;

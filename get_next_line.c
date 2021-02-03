@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:46:26 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/03 14:57:53 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/03 15:45:32 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int					split_line(char **save_backup, char **line, int idx_nl)
 
 	(*save_backup)[idx_nl] = '\0';
 	*line = ft_strdup(*save_backup);
-	if (!(res_len = ft_strlen(*save_backup + idx_nl + 1)))
+	if ((res_len = ft_strlen(*save_backup + idx_nl + 1)) == 0)
 	{
 		free(*save_backup);
 		*save_backup = 0;
@@ -71,13 +71,13 @@ int					get_next_line(int fd, char **line)
 	static char		*save_backup[OPEN_MAX];
 	int				idx_nl;
 
-	if ((fd < 0) || (line == NULL) || (BUFFER_SIZE <= 0))
+	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0))
 		return (-1);
 	while ((size_of_read = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[size_of_read] = '\0';
 		save_backup[fd] = ft_strjoin(save_backup[fd], buf);
-		if ((idx_nl = find_nl(save_backup[fd]) >= 0))
+		if ((idx_nl = find_nl(save_backup[fd])) >= 0)
 			return (split_line(&save_backup[fd], line, idx_nl));
 	}
 	return (return_all(&save_backup[fd], line, size_of_read));
