@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:48:43 by jeson             #+#    #+#             */
-/*   Updated: 2021/01/29 21:21:36 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/01 15:42:30 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@
 # endif
 
 # ifndef OPEN_MAX
-#  define OPEN_MAX 32
+#  define OPEN_MAX 4096
 # endif
 
 int				get_next_line(int fd, char **line);
 
-size_t			ft_strlen(const char *s);
-size_t			ft_strlcat(char *dest, const char *src, size_t dstsize);
-size_t			ft_strlcpy(char *dest, const char *src, size_t dstsize);
-char			*ft_strjoin(char *s1, char *s2);
+size_t			ft_strlen(char *s);
+size_t			ft_strlcpy(char *dest, char *src, size_t dstsize);
+size_t			ft_strlcat(char *dest, char *src, size_t dstsize);
 char			*ft_strdup(char *s1);
+char			*ft_strjoin(char *s1, char *s2);
 
 #endif

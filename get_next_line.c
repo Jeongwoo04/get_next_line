@@ -6,24 +6,79 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:46:26 by jeson             #+#    #+#             */
-/*   Updated: 2021/01/29 21:22:08 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/03 14:57:53 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int				ft_new_line(char *aa)
+int					find_nl(char *save_backup)
 {
+	int				i;
+
+	i = 0;
+	while (save_backup[i])
+	{
+		if (save_backup[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
-int				ft_split_line(char **aa, char **line, int idx)
+int					split_line(char **save_backup, char **line, int idx_nl)
 {
+	char			*tmp_backup;
+	int				res_len;
+
+	(*save_backup)[idx_nl] = '\0';
+	*line = ft_strdup(*save_backup);
+	if (!(res_len = ft_strlen(*save_backup + idx_nl + 1)))
+	{
+		free(*save_backup);
+		*save_backup = 0;
+		return (1);
+	}
+	tmp_backup = ft_strdup(*save_backup + idx_nl + 1);
+	free(*save_backup);
+	*save_backup = tmp_backup;
+	return (1);
 }
 
-int				ft_return(char **aa, char **line, int read_size)
+int					return_all(char **save_backup, char **line,
+		int size_of_read)
 {
+	int				idx_nl;
+
+	if (size_of_read < 0)
+		return (-1);
+	if (*save_backup && (idx_nl = find_nl(*save_backup)) >= 0)
+		return (split_line(save_backup, line, idx_nl));
+	else if (*save_backup)
+	{
+		*line = *save_backup;
+		*save_backup = 0;
+		return (0);
+	}
+	*line = ft_strdup("");
+	return (0);
 }
 
-int				get_next_line(int fd, char **line)
+int					get_next_line(int fd, char **line)
 {
+	char			buf[BUFFER_SIZE + 1];
+	int				size_of_read;
+	static char		*save_backup[OPEN_MAX];
+	int				idx_nl;
+
+	if ((fd < 0) || (line == NULL) || (BUFFER_SIZE <= 0))
+		return (-1);
+	while ((size_of_read = read(fd, buf, BUFFER_SIZE)) > 0)
+	{
+		buf[size_of_read] = '\0';
+		save_backup[fd] = ft_strjoin(save_backup[fd], buf);
+		if ((idx_nl = find_nl(save_backup[fd]) >= 0))
+			return (split_line(&save_backup[fd], line, idx_nl));
+	}
+	return (return_all(&save_backup[fd], line, size_of_read));
 }
