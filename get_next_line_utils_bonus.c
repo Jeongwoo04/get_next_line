@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus_utils.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:53:52 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/03 15:57:37 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/04 15:21:29 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ size_t			ft_strlen(char *s)
 	return (i);
 }
 
-size_t		ft_strlcpy(char *dest, char *src, size_t dstsize)
+size_t			ft_strlcpy(char *dest, char *src, size_t dstsize)
 {
-	size_t	src_len;
-	size_t	i;
+	size_t		src_len;
+	size_t		i;
 
 	src_len = 0;
 	while (src[src_len])
@@ -42,11 +42,11 @@ size_t		ft_strlcpy(char *dest, char *src, size_t dstsize)
 	return (src_len);
 }
 
-size_t		ft_strlcat(char *dest, char *src, size_t dstsize)
+size_t			ft_strlcat(char *dest, char *src, size_t dstsize)
 {
-	size_t	dest_len;
-	size_t	src_len;
-	size_t	i;
+	size_t		dest_len;
+	size_t		src_len;
+	size_t		i;
 
 	dest_len = ft_strlen(dest);
 	src_len = ft_strlen(src);
@@ -62,10 +62,10 @@ size_t		ft_strlcat(char *dest, char *src, size_t dstsize)
 	return (dest_len + src_len);
 }
 
-char		*ft_strdup(char *s1)
+char			*ft_strdup(char *s1)
 {
-	char	*res;
-	int		i;
+	char		*res;
+	int			i;
 
 	i = ft_strlen(s1);
 	if (!(res = (char *)malloc(sizeof(char) * (i + 1))))
@@ -80,11 +80,11 @@ char		*ft_strdup(char *s1)
 	return (res);
 }
 
-char		*ft_strjoin(char *s1, char *s2)
+char			*ft_strjoin(char *s1, char *s2)
 {
-	char	*res;
-	int		s1_len;
-	int		s2_len;
+	char		*res;
+	int			s1_len;
+	int			s2_len;
 
 	if (!(s1) && !(s2))
 		return (NULL);
