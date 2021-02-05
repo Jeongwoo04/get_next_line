@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:46:26 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/04 17:34:45 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/05 17:46:56 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,23 @@ int					get_res(char **save_backup, char **line,
 
 int					get_next_line(int fd, char **line)
 {
-	char			buf[BUFFER_SIZE + 1];
+	int				t = 1;
+	char			buf[t];
 	int				size_of_read;
 	static char		*save_backup[OPEN_MAX];
 	int				idx_nl;
 
-	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0))
+	if ((fd < 0) || (line == 0) || (t <= 0))
 		return (-1);
-	while ((size_of_read = read(fd, buf, BUFFER_SIZE)) > 0)
+	while ((size_of_read = read(fd, buf, t)) > 0)
 	{
 		buf[size_of_read] = '\0';
 		save_backup[fd] = ft_strjoin(save_backup[fd], buf);
+		printf("\ngnl 함수 내 루프에 저장된 정적 변수 : %s\n", save_backup[fd]);
 		if ((idx_nl = get_nl(save_backup[fd])) >= 0)
+		{
 			return (get_line(&save_backup[fd], line, idx_nl));
+		}
 	}
 	return (get_res(&save_backup[fd], line, size_of_read));
 }
@@ -127,6 +131,7 @@ int
 		"test_file3",
 		"test_file4",
 		"test_file5",
+		"test_file6",
 		"test_file7",
 		"test_file8",
 		"test_file9",

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 14:53:52 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/05 17:30:00 by jeson            ###   ########.fr       */
+/*   Created: 2021/02/05 15:09:44 by jeson             #+#    #+#             */
+/*   Updated: 2021/02/05 16:24:04 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 size_t			ft_strlen(char *s)
 {
@@ -98,4 +99,28 @@ char			*ft_strjoin(char *s1, char *s2)
 	free(s1);
 	ft_strlcat(res + s1_len, s2, s2_len + 1);
 	return (res);
+}
+
+int		main(void)
+{
+	static char	*aa[5];
+	char		*s;
+	char		*t;
+
+	s = "567";
+	t = "890";
+	aa[0] = "123";
+	printf("%p\n", &aa[0]);
+	printf("%s\n", aa[0]);
+	printf("%c\n", aa[0][0]);
+	aa[1] = ft_strjoin(aa[1], s);
+	printf("%s\n", aa[1]);
+	printf("%p\n", &aa[1]);
+	printf("%p\n", &aa[2]);
+	free(aa[1]);
+	aa[1] = ft_strjoin(aa[1], t);
+	printf("%s\n", aa[1]);
+	printf("%p\n", &aa[1]);
+	printf("%p\n", &aa[2]);
+	return (0);
 }
