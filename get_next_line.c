@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:46:26 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/07 17:55:41 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/07 18:21:34 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					get_res(char **save_backup, char **line,
 	else if (*save_backup)
 	{
 		*line = *save_backup;
-		*save_backup = 0;
+		free(*save_backup);
 		return (0);
 	}
 	*line = ft_strdup("");
