@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:46:26 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/03 16:38:54 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/07 18:12:09 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,13 @@ int					get_nl(char *save_backup)
 
 int					get_line(char **save_backup, char **line, int idx_nl)
 {
-	char			*tmp_backup;
-	int				res_len;
+	char			*save_rest;
 
 	(*save_backup)[idx_nl] = '\0';
 	*line = ft_strdup(*save_backup);
-	if ((res_len = ft_strlen(*save_backup + idx_nl + 1)) == 0)
-	{
-		free(*save_backup);
-		*save_backup = 0;
-		return (1);
-	}
-	tmp_backup = ft_strdup(*save_backup + idx_nl + 1);
+	save_rest = ft_strdup(*save_backup + idx_nl + 1);
 	free(*save_backup);
-	*save_backup = tmp_backup;
+	*save_backup = save_rest;
 	return (1);
 }
 
@@ -57,7 +50,7 @@ int					get_res(char **save_backup, char **line,
 	else if (*save_backup)
 	{
 		*line = *save_backup;
-		*save_backup = 0;
+		free(*save_backup);
 		return (0);
 	}
 	*line = ft_strdup("");

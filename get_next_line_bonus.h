@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:48:43 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/03 15:57:01 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/07 13:56:43 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4096
+#  define BUFFER_SIZE 32
 # endif
 
 # ifndef OPEN_MAX
