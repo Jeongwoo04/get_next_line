@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:46:26 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/07 18:24:17 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/08 15:22:48 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int					get_next_line(int fd, char **line)
 	static char		*save_backup[OPEN_MAX];
 	int				idx_nl;
 
-	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0))
+	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0) || (fd > OPEN_MAX))
 		return (-1);
 	while ((size_of_read = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
