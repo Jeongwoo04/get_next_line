@@ -6,7 +6,7 @@
 /*   By: jeson <jeson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:48:43 by jeson             #+#    #+#             */
-/*   Updated: 2021/02/07 13:56:29 by jeson            ###   ########.fr       */
+/*   Updated: 2021/02/08 12:35:30 by jeson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # endif
 
 # ifndef OPEN_MAX
-#  define OPEN_MAX 4096
+#  define OPEN_MAX 256
 # endif
 
 int				get_next_line(int fd, char **line);
